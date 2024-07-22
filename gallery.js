@@ -87,3 +87,8 @@ images.forEach(({ preview, original, description }) => {
     event.preventDefault();
   });
 });
+
+gallery.addEventListener("click", selectImage);
+function selectImage(event) {
+  console.log(event.target.src);
+}
