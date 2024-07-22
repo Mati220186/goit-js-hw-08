@@ -63,17 +63,27 @@ const images = [
     description: "Lighthouse Coast Sea",
   },
 ];
-const { preview, original, description } = images;
-const galleryList = document.querySelector("ul.galler");
-images.forEach((image) => {
-  const listItem = document.createElement("li");
-  listItem.innerHTML = `<li class="gallery-item"><a class="gallery-link" href="${original}">
-          <img
-            class="gallery-image"
-            src="${preview}"
-            data-source="original"
-            alt="${description}"
-          />
-        </a></li>`;
+
+const gallery = document.querySelector(".gallery");
+
+images.forEach(({ preview, original, description }) => {
+  const galleryItem = document.createElement("li");
+  galleryItem.classList.add("gallery-item");
+
+  const galleryLink = document.createElement("a");
+  galleryLink.classList.add("galler-link");
+  galleryLink.href = original;
+
+  const galleryImage = document.createElement("img");
+  galleryImage.classList.add("gallery-image");
+  galleryImage.src = preview;
+  galleryImage.alt = description;
+  galleryImage.dataset.source = original;
+
+  galleryLink.appendChild(galleryImage);
+  galleryItem.appendChild(galleryLink);
+  gallery.appendChild(galleryItem);
+  galleryLink.addEventListener("click", (event) => {
+    event.preventDefault();
+  });
 });
-galleryList.appendChild(listItem);
