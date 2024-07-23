@@ -85,6 +85,22 @@ images.forEach(({ preview, original, description }) => {
   gallery.appendChild(galleryItem);
   galleryLink.addEventListener("click", (event) => {
     event.preventDefault();
+    basicLightbox
+      .create(
+        `
+		<img width="400" height="90" src="${original}">
+	`
+      )
+      .show();
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        instance.close();
+        document.removeEventListener("keydown", closeOnEscape);
+      }
+    };
+
+    document.addEventListener("keydown", closeOnEscape);
   });
 });
 
