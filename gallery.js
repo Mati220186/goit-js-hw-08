@@ -85,13 +85,12 @@ images.forEach(({ preview, original, description }) => {
   gallery.appendChild(galleryItem);
   galleryLink.addEventListener("click", (event) => {
     event.preventDefault();
-    basicLightbox
-      .create(
-        `
-		<img width="400" height="90" src="${original}">
-	`
-      )
-      .show();
+
+    const instance = basicLightbox.create(`
+      <img width="400" height="90" src="${original}">
+    `);
+
+    instance.show();
 
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
@@ -103,8 +102,3 @@ images.forEach(({ preview, original, description }) => {
     document.addEventListener("keydown", closeOnEscape);
   });
 });
-
-gallery.addEventListener("click", selectImage);
-function selectImage(event) {
-  console.log(event.target.src);
-}
